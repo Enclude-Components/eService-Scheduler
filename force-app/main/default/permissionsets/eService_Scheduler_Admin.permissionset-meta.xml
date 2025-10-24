@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PermissionSet xmlns="http://soap.sforce.com/2006/04/metadata">
+    <description>Gives admin access to eService Scheduler extension functionality.</description>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>eCASS02t1__Program_Service__c.Service_Territory__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <hasActivationRequired>false</hasActivationRequired>
+    <label>eService Scheduler Admin</label>
+</PermissionSet>
