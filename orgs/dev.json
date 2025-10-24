@@ -1,0 +1,32 @@
+{
+  "orgName": "eService-Scheduler - Dev Org",
+  "edition": "Enterprise",
+  "features": [
+    "LightningScheduler",
+    "ForceComPlatform"
+  ],
+  "settings": {
+    "mapsAndLocationSettings": {
+      "enableMapsAndLocation": true,
+      "enableAddressAutoComplete": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "userManagementSettings": {
+      "enableNewProfileUI": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true,
+      "sessionSettings": {
+        "forceRelogin": false
+      }
+    },
+    "languageSettings": {
+      "enableTranslationWorkbench": true
+    }
+  }
+}

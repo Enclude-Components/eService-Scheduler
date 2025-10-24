@@ -1,0 +1,27 @@
+{
+  "orgName": "eService-Scheduler - Beta Test Org",
+  "edition": "Developer",
+  "features": [
+    "AssetScheduling:10"
+  ],
+  "settings": {
+    "mapsAndLocationSettings": {
+      "enableMapsAndLocation": true,
+      "enableAddressAutoComplete": true
+    },
+    "lightningExperienceSettings": {
+      "enableS1DesktopEnabled": true
+    },
+    "chatterSettings": {
+      "enableChatter": true
+    },
+    "userManagementSettings": {
+      "enableNewProfileUI": true
+    },
+    "securitySettings": {
+      "enableAdminLoginAsAnyUser": true,
+      "sessionSettings": {
+        "forceRelogin": false
+      }
+    }  }
+}
