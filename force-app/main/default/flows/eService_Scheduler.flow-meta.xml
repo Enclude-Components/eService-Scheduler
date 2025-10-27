@@ -86,6 +86,13 @@
                 <elementReference>Get_Programme.Name</elementReference>
             </value>
         </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.WorkTypeId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Work_Type_Member.WorkTypeId</elementReference>
+            </value>
+        </assignmentItems>
         <connector>
             <targetReference>Create_Service_Appointment</targetReference>
         </connector>
@@ -240,6 +247,27 @@
         <object>eCASS02t1__Program_Service__c</object>
         <storeOutputAutomatically>true</storeOutputAutomatically>
     </recordLookups>
+    <recordLookups>
+        <name>Get_Work_Type_Member</name>
+        <label>Get Work Type Member</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Select_Service_Resource_Screen</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>WorkTypeGroupId</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Work_Type_Group_Select.workTypeGroupId</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>WorkTypeGroupMember</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>Programme_Select_Screen</name>
         <label>Programme Select Screen</label>
@@ -358,7 +386,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Select_Service_Resource_Screen</targetReference>
+            <targetReference>Get_Work_Type_Member</targetReference>
         </connector>
         <fields>
             <name>Work_Type_Group_Select</name>
