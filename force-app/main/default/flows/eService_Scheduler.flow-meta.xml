@@ -18,11 +18,76 @@
             <assignToReference>ServiceAppointment.ServiceTerritoryId</assignToReference>
             <operator>Assign</operator>
             <value>
-                <elementReference>Programme_Select</elementReference>
+                <elementReference>Get_Programme.Service_Territory__c</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.ContactId</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>recordId.eCASS02t1__Client__c</elementReference>
             </value>
         </assignmentItems>
         <connector>
             <targetReference>Select_Work_Type_Group_Screen</targetReference>
+        </connector>
+    </assignments>
+    <assignments>
+        <name>Set_Service_Appointment_Selected_Values</name>
+        <label>Set Service Appointment Selected Values</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.Duration</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.workType.EstimatedDuration</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.DurationType</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.workType.DurationType</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.SchedStartTime</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.selectedStartTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.SchedEndTime</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.selectedEndTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.ArrivalWindowStartTime</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.selectedStartTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.ArrivalWindowEndTime</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Select_Service_Appointment_time.selectedEndTime</elementReference>
+            </value>
+        </assignmentItems>
+        <assignmentItems>
+            <assignToReference>ServiceAppointment.Subject</assignToReference>
+            <operator>Assign</operator>
+            <value>
+                <elementReference>Get_Programme.Name</elementReference>
+            </value>
+        </assignmentItems>
+        <connector>
+            <targetReference>Create_Service_Appointment</targetReference>
         </connector>
     </assignments>
     <dynamicChoiceSets>
@@ -65,6 +130,116 @@
         </value>
     </processMetadataValues>
     <processType>Appointments</processType>
+    <recordCreates>
+        <name>Create_Assigned_Resource</name>
+        <label>Create Assigned Resource</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Intervention</targetReference>
+        </connector>
+        <inputAssignments>
+            <field>IsRequiredResource</field>
+            <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ServiceAppointmentId</field>
+            <value>
+                <elementReference>ServiceAppointment.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>ServiceResourceId</field>
+            <value>
+                <elementReference>Select_Service_Resource.selectedServiceResourceId</elementReference>
+            </value>
+        </inputAssignments>
+        <object>AssignedResource</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Intervention</name>
+        <label>Create Intervention</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <inputAssignments>
+            <field>Service_Appointment__c</field>
+            <value>
+                <elementReference>ServiceAppointment.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Client_Account__c</field>
+            <value>
+                <elementReference>recordId.eCASS02t1__Client_Account__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Date_and_Time_client_entered__c</field>
+            <value>
+                <elementReference>ServiceAppointment.SchedStartTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Date_and_Time_client_left__c</field>
+            <value>
+                <elementReference>ServiceAppointment.SchedEndTime</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Programme_Group__c</field>
+            <value>
+                <elementReference>Get_Programme.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Referral__c</field>
+            <value>
+                <elementReference>recordId.Id</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <field>eCASS02t1__Young_Person__c</field>
+            <value>
+                <elementReference>recordId.eCASS02t1__Client__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>eCASS02t1__Attendance__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordCreates>
+    <recordCreates>
+        <name>Create_Service_Appointment</name>
+        <label>Create Service Appointment</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <connector>
+            <targetReference>Create_Assigned_Resource</targetReference>
+        </connector>
+        <inputReference>ServiceAppointment</inputReference>
+    </recordCreates>
+    <recordLookups>
+        <name>Get_Programme</name>
+        <label>Get Programme</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <assignNullValuesIfNoRecordsFound>false</assignNullValuesIfNoRecordsFound>
+        <connector>
+            <targetReference>Set_Service_Appointment_Initial_Values</targetReference>
+        </connector>
+        <filterLogic>and</filterLogic>
+        <filters>
+            <field>Id</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>Programme_Select</elementReference>
+            </value>
+        </filters>
+        <getFirstRecordOnly>true</getFirstRecordOnly>
+        <object>eCASS02t1__Program_Service__c</object>
+        <storeOutputAutomatically>true</storeOutputAutomatically>
+    </recordLookups>
     <screens>
         <name>Programme_Select_Screen</name>
         <label>Programme Select Screen</label>
@@ -74,7 +249,7 @@
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
         <connector>
-            <targetReference>Set_Service_Appointment_Initial_Values</targetReference>
+            <targetReference>Get_Programme</targetReference>
         </connector>
         <fields>
             <name>Programme_Select</name>
@@ -89,6 +264,92 @@
         <showHeader>false</showHeader>
     </screens>
     <screens>
+        <name>Select_Service_Resource_Screen</name>
+        <label>Select Service Resource Screen</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>true</allowPause>
+        <connector>
+            <targetReference>Select_Time_Slot</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Service_Resource</name>
+            <extensionName>runtime_appointmentbooking:flowCandidate</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>serviceTerritoryId</name>
+                <value>
+                    <elementReference>Get_Programme.Service_Territory__c</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>parentRecordId</name>
+                <value>
+                    <elementReference>ServiceAppointment.ParentRecordId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>workTypeGroupId</name>
+                <value>
+                    <elementReference>Work_Type_Group_Select.workTypeGroupId</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>true</showHeader>
+    </screens>
+    <screens>
+        <name>Select_Time_Slot</name>
+        <label>Select Time Slot</label>
+        <locationX>0</locationX>
+        <locationY>0</locationY>
+        <allowBack>true</allowBack>
+        <allowFinish>true</allowFinish>
+        <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Set_Service_Appointment_Selected_Values</targetReference>
+        </connector>
+        <fields>
+            <name>Select_Service_Appointment_time</name>
+            <extensionName>runtime_appointmentbooking:flowTimeslot</extensionName>
+            <fieldType>ComponentInstance</fieldType>
+            <inputParameters>
+                <name>parentRecordId</name>
+                <value>
+                    <elementReference>ServiceAppointment.ParentRecordId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>serviceTerritoryId</name>
+                <value>
+                    <elementReference>ServiceAppointment.ServiceTerritoryId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>workTypeGroupId</name>
+                <value>
+                    <elementReference>Work_Type_Group_Select.workTypeGroupId</elementReference>
+                </value>
+            </inputParameters>
+            <inputParameters>
+                <name>serviceResourceId</name>
+                <value>
+                    <elementReference>Select_Service_Resource.selectedServiceResourceId</elementReference>
+                </value>
+            </inputParameters>
+            <inputsOnNextNavToAssocScrn>UseStoredValues</inputsOnNextNavToAssocScrn>
+            <isRequired>true</isRequired>
+            <storeOutputAutomatically>true</storeOutputAutomatically>
+        </fields>
+        <showFooter>true</showFooter>
+        <showHeader>false</showHeader>
+    </screens>
+    <screens>
         <name>Select_Work_Type_Group_Screen</name>
         <label>Select Work Type Group Screen</label>
         <locationX>0</locationX>
@@ -96,6 +357,9 @@
         <allowBack>true</allowBack>
         <allowFinish>true</allowFinish>
         <allowPause>false</allowPause>
+        <connector>
+            <targetReference>Select_Service_Resource_Screen</targetReference>
+        </connector>
         <fields>
             <name>Work_Type_Group_Select</name>
             <extensionName>runtime_appointmentbooking:flowWorkType</extensionName>
