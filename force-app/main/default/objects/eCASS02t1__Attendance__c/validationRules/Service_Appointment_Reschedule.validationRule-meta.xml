@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Service_Appointment_Reschedule</fullName>
+    <active>true</active>
+    <description>Ensures that Support Deliveries associated with Service Appointments are not directly updated</description>
+    <errorConditionFormula>NOT(ISBLANK(Service_Appointment__c))
+&amp;&amp;
+(
+    eCASS02t1__Date_and_Time_client_entered__c !=  Service_Appointment__r.SchedStartTime
+||
+    eCASS02t1__Date_and_Time_client_left__c !=  Service_Appointment__r.SchedEndTime
+)</errorConditionFormula>
+    <errorDisplayField>Service_Appointment__c</errorDisplayField>
+    <errorMessage>Support Deliveries associated with a Service Appointment must be rescheduled from the Service Appointment record</errorMessage>
+</ValidationRule>
