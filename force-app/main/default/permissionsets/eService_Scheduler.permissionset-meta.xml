@@ -3,6 +3,11 @@
     <description>Allows User to be a Salesforce Scheduler Service Resource &amp; gives access to eService Scheduler extension functionality.</description>
     <fieldPermissions>
         <editable>false</editable>
+        <field>eCASS02t1__Attendance__c.Service_Appointment__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>eCASS02t1__Program_Service__c.Service_Territory__c</field>
         <readable>true</readable>
     </fieldPermissions>
