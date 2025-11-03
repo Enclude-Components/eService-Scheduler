@@ -36,11 +36,11 @@ From the created User's record (NOT the admin User's record):
 - Navigate to Created Resource
     - Related tab -> Shifts -> New -> Enter record details -> Save
 
-
 ### Salesforce Scheduler Settings
 - ⚙️ -> Setup -> "Salesforce Scheduler Settings"
 - Recommended enabled options:
     - Event Management
+    - Resource Appointment Sharing
 
 ### Salesforce Scheduler Policies
 - ⚙️ -> Setup -> "Scheduling Policies" -> Default Appointment Scheduling Policy -> Edit
