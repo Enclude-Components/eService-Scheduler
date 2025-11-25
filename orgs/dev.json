@@ -3,6 +3,7 @@
   "edition": "Enterprise",
   "features": [
     "LightningScheduler",
+    "AssetScheduling:10",
     "ForceComPlatform"
   ],
   "settings": {
